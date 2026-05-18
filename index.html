@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HARD | Agostinho Agt - Prévia do Beat</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+            font-family: 'Inter', sans-serif;
+            color: #eef5ff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animação flutuante de cima para baixo (10s ciclo) */
+        @keyframes floatGlow {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(12px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Main container com animação flutuante */
+        .preview-card {
+            max-width: 950px;
+            width: 100%;
+            background: rgba(12, 20, 30, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(72, 187, 255, 0.3);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 255, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: floatGlow 10s ease-in-out infinite;
+        }
+
+        /* Header com gradiente e imagem de perfil */
+        .beat-header {
+            background: linear-gradient(135deg, #121e2c 0%, #07121f 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.25);
+            text-align: center;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #3bc9db;
+            box-shadow: 0 0 15px rgba(59, 201, 219, 0.5);
+            background: #0f212e;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF, #7df9ff, #4facfe);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 230, 200, 0.18);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #6effe8;
+            border: 1px solid rgba(110, 255, 232, 0.5);
+            margin-bottom: 0.8rem;
+        }
+
+        .beat-header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin: 0.3rem 0;
+        }
+
+        /* Texto com reflexo e gradiente para "HARD" */
+        .gradient-reflect-text {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, #ffb347, #ff7e05, #ffcc33, #ffaa22);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(255, 150, 0, 0.4);
+            position: relative;
+            display: inline-block;
+        }
+
+        .gradient-reflect-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(120deg, rgba(255, 180, 71, 0.4), rgba(255, 126, 5, 0.2));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            filter: blur(3px);
+            opacity: 0.6;
+            transform: scaleY(-0.3) translateY(5px);
+            pointer-events: none;
+        }
+
+        .beat-header p {
+            color: #b4cdff;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* Área principal */
+        .beat-body {
+            padding: 2rem 2rem 1.8rem;
+        }
+
+        /* info do beat */
+        .beat-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px dashed rgba(72, 187, 255, 0.4);
+        }
+
+        .beat-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .beat-title i {
+            color: #ffaa33;
+            font-size: 1.6rem;
+            text-shadow: 0 0 5px #ffaa33;
+        }
+
+        .bpm-tag {
+            background: #0f212e;
+            padding: 0.35rem 1rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffcd94;
+            border: 1px solid #ffaa3355;
+        }
+
+        /* player principal */
+        .player-wrapper {
+            background: #07121cd9;
+            border-radius: 2rem;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* visualizador de forma de onda dinâmica com canvas */
+        .waveform-canvas-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            height: 80px;
+            background: #030b10;
+            border-radius: 50px;
+            padding: 5px 15px;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 60px;
+            background: transparent;
+            border-radius: 30px;
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 60px;
+            outline: none;
+            background: #0a111c;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: #0f1a24;
+        }
+
+        /* ações */
+        .action-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(20, 35, 50, 0.8);
+            backdrop-filter: blur(4px);
+            padding: 0.75rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(59, 201, 219, 0.5);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: #f0fcff;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(95deg, #1d72b8, #0e4b7a);
+            border: none;
+            box-shadow: 0 5px 12px rgba(0,160,255,0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(95deg, #2a8ad6, #136299);
+            box-shadow: 0 10px 20px rgba(0,180,255,0.4);
+        }
+
+        .btn-outline:hover {
+            background: #1e2e3e;
+            border-color: #3bc9db;
+            transform: translateY(-2px);
+        }
+
+        /* tags e licença */
+        .license-tag {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #b8d0ff;
+            border-top: 1px solid rgba(72, 187, 255, 0.25);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .license-tag span i {
+            margin-right: 6px;
+            color: #3bc9db;
+        }
+
+        /* rodapé com redes sociais */
+        .social-footer {
+            background: #030d14aa;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(59, 201, 219, 0.25);
+            backdrop-filter: blur(4px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.7rem;
+        }
+
+        .social-links a {
+            color: #cae9ff;
+            font-size: 1.3rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            background: #0e1a24;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px solid #2f6f8a;
+        }
+
+        .social-links a:hover {
+            color: #7df9ff;
+            transform: translateY(-3px);
+            border-color: #7df9ff;
+            background: #132633;
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            letter-spacing: 0.3px;
+        }
+
+        /* responsivo */
+        @media (max-width: 650px) {
+            .gradient-reflect-text { font-size: 1.8rem; }
+            .beat-title { font-size: 1.4rem; }
+            .btn { padding: 0.55rem 1.2rem; font-size: 0.8rem; }
+            .player-wrapper { padding: 1rem; }
+            .profile-img { width: 55px; height: 55px; }
+            .profile-name { font-size: 1.2rem; }
+        }
+
+        /* Botão de play automático visível */
+        .auto-play-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0f212ecc;
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #7df9ff;
+            border: 1px solid #3bc9db;
+            z-index: 1000;
+            pointer-events: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="preview-card">
+    <div class="beat-header">
+        <div class="profile-section">
+            <!-- Imagem do perfil (Agostinho Agt) - Substitua "Img.jpg" pelo caminho correto -->
+            <img src="Img.jpg" alt="Agostinho Agt" class="profile-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/70?text=AGT';">
+            <span class="profile-name">Agostinho Agt</span>
+        </div>
+        <div class="badge">
+            <i class="fas fa-headphones"></i> Beat Trap com qualidade profissional · Sample com marca d'água auditiva
+        </div>
+        <h1>
+            <span class="gradient-reflect-text" data-text="HARD">HARD</span>
+        </h1>
+        <p><i class="fas fa-music"></i> 🎧 Ouça a prévia do beat: Agostinho Agt</p>
+    </div>
+
+    <div class="beat-body">
+        <div class="beat-info">
+            <div class="beat-title">
+                <i class="fas fa-waveform"></i>
+                <span>HARD</span>
+            </div>
+            <div class="bpm-tag">
+                <i class="fas fa-metronome"></i> 136 BPM · Nota: Fá Maior
+            </div>
+        </div>
+
+        <div class="player-wrapper">
+            <div class="waveform-canvas-container">
+                <canvas id="waveformCanvas" width="800" height="60" style="width:100%; height:60px;"></canvas>
+            </div>
+
+            <!-- Player de áudio usando Beat.wav -->
+            <audio id="beatAudioPlayer" controls preload="auto" autoplay>
+                <source src="Beat.wav" type="audio/wav">
+                Seu navegador não suporta player de áudio.
+            </audio>
+            <div class="action-buttons">
+                <a href="#" id="downloadPreviewBtn" class="btn btn-outline">
+                    <i class="fas fa-download"></i> Descarregar prévia (WAV)
+                </a>
+                <a href="#" id="contactBtn" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Adquirir Licença Full
+                </a>
+            </div>
+        </div>
+
+        <div class="license-tag">
+            <span><i class="fas fa-watermark"></i> Preview com tag de voz · beat protegido</span>
+            <span><i class="fas fa-charging-station"></i> Master profissional · Sem clipping</span>
+            <span><i class="fas fa-file-audio"></i> Formato WAV / MP3 disponível na compra</span>
+        </div>
+    </div>
+
+    <div class="social-footer">
+        <div class="social-links">
+            <a href="https://web.facebook.com/profile.php?id=100080875782151&_rdc=1&_rdr#" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="https://www.instagram.com/agostinhoagt/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://open.spotify.com/intl-pt/artist/78v0myYeXu4LTNx3PZB1xM?si=rDo3tHfORHu_BjKCdxMjmw&nd=1&dlsi=13cb902a86314d8f" target="_blank" rel="noopener"><i class="fab fa-spotify"></i> Spotify</a>
+            <a href="https://www.tiktok.com/@agostinhoagt_?_d=e8b8debi2m68hj&sec_uid=MS4wLjABAAAArw_5N7ZrzPnLI1bdR98MJ8euedWKWJrfq0bsJ_ZBOse685-_EIueUl-_Sk_jZ-Uo&share_author_id=7132825698150007814&sharer_language=pt&u_code=e3b24mkc92e80d&timestamp=1686401072&user_id=7132825698150007814&sec_user_id=MS4wLjABAAAArw_5N7ZrzPnLI1bdR98MJ8euedWKWJrfq0bsJ_ZBOse685-_EIueUl-_Sk_jZ-Uo&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7242666685332195090&share_link_i=&_r=1" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+        <div class="footer-copy">
+            <i class="fas fa-crown"></i> The Best Work · Estúdio Beats — Direciona cliente para prévia real
+        </div>
+    </div>
+</div>
+<div class="auto-play-hint">
+    <i class="fas fa-play-circle"></i> Beat a tocar automaticamente
+</div>
+
+<script>
+    (function() {
+        // Configuração completa
+        const beatConfig = {
+            beatTitle: "HARD",
+            previewAudioUrl: "Beat.wav",      // ficheiro Beat.wav local
+            previewDownloadUrl: "Beat.wav",   // mesmo ficheiro para download (prévia com watermark)
+            contactLink: "https://wa.me/244926261011?text=Olá%20Agostinho!%20Gostei%20do%20beat%20HARD%20e%20quero%20adquirir%20a%20licença%20completa."
+        };
+
+        // Referências
+        const audioPlayer = document.getElementById('beatAudioPlayer');
+        const canvas = document.getElementById('waveformCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Forçar redimensionamento adaptável do canvas
+        function resizeCanvas() {
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            const width = container.clientWidth;
+            canvas.width = width;
+            canvas.height = 60;
+            drawPlaceholderWave();
+        }
+        
+        // Desenha placeholder animado
+        let animationFrameId = null;
+        let audioContext = null;
+        let sourceNode = null;
+        let analyserNode = null;
+        let isAudioAnalyzing = false;
+        
+        // Criar contexto de áudio
+        function initAudioContext() {
+            if (audioContext && audioContext.state !== 'closed') return audioContext;
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyserNode = audioContext.createAnalyser();
+            analyserNode.fftSize = 256;
+            return audioContext;
+        }
+        
+        // Conectar o elemento audio ao analyser
+        function connectAudioToAnalyser() {
+            if (!audioPlayer || !audioContext) return false;
+            try {
+                if (sourceNode) {
+                    try { sourceNode.disconnect(); } catch(e) {}
+                }
+                sourceNode = audioContext.createMediaElementSource(audioPlayer);
+                sourceNode.connect(analyserNode);
+                analyserNode.connect(audioContext.destination);
+                return true;
+            } catch (err) {
+                console.warn("Erro ao conectar audio ao analyser: ", err);
+                return false;
+            }
+        }
+        
+        // Desenhar forma de onda baseada nos dados de frequência
+        function drawWaveformFromAudio() {
+            if (!canvas || !ctx) return;
+            if (!analyserNode || !isAudioAnalyzing || !audioPlayer || audioPlayer.paused || audioPlayer.ended) {
+                drawRhythmicPlaceholder();
+                return;
+            }
+            
+            const dataArray = new Uint8Array(analyserNode.frequencyBinCount);
+            analyserNode.getByteFrequencyData(dataArray);
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            ctx.clearRect(0, 0, width, height);
+            
+            const barCount = Math.min(80, Math.floor(width / 6));
+            const step = Math.floor(dataArray.length / barCount);
+            const barWidth = width / barCount;
+            
+            let sum = 0;
+            for (let i = 0; i < barCount; i++) {
+                const idx = i * step;
+                const value = dataArray[idx] || 0;
+                let percent = value / 255;
+                const barHeight = Math.max(4, percent * height * 0.9);
+                const x = i * barWidth;
+                const y = height - barHeight;
+                const gradient = ctx.createLinearGradient(x, y, x, height);
+                gradient.addColorStop(0, '#3bc9db');
+                gradient.addColorStop(1, '#1a6f8f');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x + 1, y, barWidth - 2, barHeight);
+                sum += value;
+            }
+            if (sum < 15) drawRhythmicPlaceholder();
+        }
+        
+        let time = 0;
+        function drawRhythmicPlaceholder() {
+            if (!ctx || !canvas) return;
+            const width = canvas.width;
+            const height = canvas.height;
+            ctx.clearRect(0, 0, width, height);
+            
+            const barCount = 48;
+            const barWidth = width / barCount;
+            time += 0.12;
+            
+            let volumeFactor = 0.5;
+            if (audioPlayer && !audioPlayer.paused && !audioPlayer.ended) {
+                const t = audioPlayer.currentTime;
+                volumeFactor = 0.4 + (Math.sin(t * 25) * 0.15) + (Math.sin(t * 11) * 0.1);
+                volumeFactor = Math.min(0.95, Math.max(0.3, volumeFactor));
+            } else {
+                volumeFactor = 0.45 + Math.sin(time) * 0.1;
+            }
+            
+            for (let i = 0; i < barCount; i++) {
+                let barHeight = 8 + Math.sin(i * 0.4 + time) * 12;
+                barHeight = barHeight * (0.7 + volumeFactor * 0.8);
+                barHeight = Math.min(height - 4, Math.max(6, barHeight));
+                const x = i * barWidth;
+                const y = height - barHeight;
+                const intensity = 0.5 + (barHeight / height) * 0.8;
+                ctx.fillStyle = `rgba(59, 201, 219, ${0.5 + intensity * 0.5})`;
+                ctx.fillRect(x + 1, y, barWidth - 2, barHeight);
+            }
+        }
+        
+        function drawPlaceholderWave() {
+            drawRhythmicPlaceholder();
+        }
+        
+        function startVisualizerLoop() {
+            function updateVisuals() {
+                if (!canvas || !canvas.isConnected) return;
+                if (analyserNode && isAudioAnalyzing && audioPlayer && !audioPlayer.paused && !audioPlayer.ended) {
+                    drawWaveformFromAudio();
+                } else {
+                    drawRhythmicPlaceholder();
+                }
+                animationFrameId = requestAnimationFrame(updateVisuals);
+            }
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(updateVisuals);
+        }
+        
+        // Ativar análise de áudio
+        async function enableAudioAnalysis() {
+            if (isAudioAnalyzing) return;
+            if (!audioContext || audioContext.state === 'closed') {
+                const ctxTemp = initAudioContext();
+                if (ctxTemp.state === 'suspended') {
+                    await ctxTemp.resume();
+                }
+            }
+            if (!analyserNode) {
+                analyserNode = audioContext.createAnalyser();
+                analyserNode.fftSize = 256;
+            }
+            const connected = connectAudioToAnalyser();
+            if (connected) {
+                isAudioAnalyzing = true;
+                if (audioContext && audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+            }
+        }
+        
+        // Função para tentar tocar automaticamente
+        async function tryAutoPlay() {
+            if (!audioPlayer) return;
+            
+            // Tenta tocar o áudio
+            try {
+                // Força o carregamento
+                audioPlayer.load();
+                
+                // Pequeno delay para garantir que o elemento está pronto
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Toca o áudio
+                const playPromise = audioPlayer.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Autoplay iniciado com sucesso!");
+                        // Ativa a análise visual
+                        enableAudioAnalysis();
+                    }).catch(error => {
+                        console.log("Autoplay bloqueado pelo navegador:", error);
+                        // Mostra dica para o usuário clicar em qualquer lugar
+                        const hint = document.querySelector('.auto-play-hint');
+                        if (hint) {
+                            hint.innerHTML = '<i class="fas fa-hand-pointer"></i> Clique na página para ouvir o beat';
+                            hint.style.pointerEvents = 'auto';
+                            hint.style.cursor = 'pointer';
+                            hint.onclick = () => {
+                                audioPlayer.play();
+                                hint.innerHTML = '<i class="fas fa-play-circle"></i> Beat a tocar';
+                                setTimeout(() => {
+                                    hint.style.opacity = '0';
+                                    setTimeout(() => hint.remove(), 1000);
+                                }, 3000);
+                            };
+                        }
+                    });
+                }
+            } catch (err) {
+                console.log("Erro no autoplay:", err);
+            }
+        }
+        
+        // Eventos do player para activar análise
+        audioPlayer.addEventListener('play', async () => {
+            if (!audioContext) {
+                initAudioContext();
+            }
+            if (audioContext && audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+            if (!isAudioAnalyzing) {
+                await enableAudioAnalysis();
+            }
+            if (!sourceNode && audioContext) {
+                connectAudioToAnalyser();
+                isAudioAnalyzing = true;
+            }
+        });
+        
+        audioPlayer.addEventListener('canplay', () => {
+            if (!isAudioAnalyzing && audioContext) {
+                enableAudioAnalysis();
+            }
+        });
+        
+        // Clique do usuário para garantir áudio context no mobile (se necessário)
+        document.body.addEventListener('click', function initOnce() {
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+                if (audioPlayer.paused) {
+                    audioPlayer.play().catch(e => console.log("still blocked"));
+                }
+            }
+            if (!isAudioAnalyzing && audioPlayer && audioPlayer.src) {
+                enableAudioAnalysis();
+            }
+        });
+        
+        // Inicializar
+        resizeCanvas();
+        startVisualizerLoop();
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+        
+        // DOWNLOAD CORRIGIDO - força o download do ficheiro Beat.wav
+        const downloadBtn = document.getElementById('downloadPreviewBtn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Método robusto para forçar download do Beat.wav
+                const fileUrl = beatConfig.previewDownloadUrl;
+                
+                // Cria um link de download
+                const link = document.createElement('a');
+                link.href = fileUrl;
+                link.download = "HARD_Agostinho_AGT_preview.wav";
+                link.target = "_blank";
+                
+                // Fallback caso o download não funcione diretamente
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Mensagem de confirmação
+                const toast = document.createElement('div');
+                toast.innerText = '⬇️ A descarregar HARD.wav - Prévia com marca d\'água';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.background = '#0f212ecc';
+                toast.style.backdropFilter = 'blur(12px)';
+                toast.style.padding = '10px 24px';
+                toast.style.borderRadius = '60px';
+                toast.style.fontSize = '0.85rem';
+                toast.style.color = '#c9f0ff';
+                toast.style.border = '1px solid #3bc9db';
+                toast.style.zIndex = '999';
+                toast.style.fontWeight = '500';
+                toast.style.whiteSpace = 'nowrap';
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 800);
+                }, 2500);
+            });
+        }
+        
+        // Botão WhatsApp
+        const contactBtn = document.getElementById('contactBtn');
+        if (contactBtn) {
+            contactBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open(beatConfig.contactLink, '_blank');
+            });
+        }
+        
+        // Set audio source
+        if (audioPlayer) {
+            const sourceElem = audioPlayer.querySelector('source');
+            if (sourceElem) {
+                sourceElem.src = beatConfig.previewAudioUrl;
+            }
+            audioPlayer.load();
+            
+            // Tenta iniciar o autoplay após carregar
+            setTimeout(() => {
+                tryAutoPlay();
+            }, 200);
+        }
+        
+        // Corrige texto do gradiente refletido
+        const gradSpan = document.querySelector('.gradient-reflect-text');
+        if (gradSpan) {
+            const txt = gradSpan.innerText;
+            gradSpan.setAttribute('data-text', txt);
+        }
+    })();
+</script>
+</body>
+</html>
